@@ -23,59 +23,67 @@ import { genreInputs } from "./Genformsourse";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 // import "./style/global.css";
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   return (
     <div className={darkMode ? "app dark" : "app"}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="users">
-              <Route index element={<UsList />} />
-              <Route path=":userId" element={<UsSingle />} />
-              <Route
-                path="Usnew"
-                element={<UsNew inputs={userInputs} title="Add new user" />}
-              />
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/">
+              <Route index element={<Home />} />
+              <Route path="login" element={<Login />} />
+              <Route path="users">
+                <Route index element={<UsList />} />
+                <Route path=":userId" element={<UsSingle />} />
+                <Route
+                  path="Usnew"
+                  element={<UsNew inputs={userInputs} title="Add new user" />}
+                />
+              </Route>
+              <Route path="books">
+                <Route index element={<BkList />} />
+                <Route path=":bookId" element={<BkSingle />} />
+                <Route
+                  path="Bknew"
+                  element={<BkNew inputs={bookInputs} title="Add new book" />}
+                />
+              </Route>
+              <Route path="authers">
+                <Route index element={<AuList />} />
+                <Route path=":autherId" element={<AuSingle />} />
+                <Route
+                  path="Aunew"
+                  element={
+                    <AuNew inputs={autherInputs} title="Add new auther" />
+                  }
+                />
+              </Route>
+              <Route path="languages">
+                <Route index element={<LanList />} />
+                <Route
+                  path="LanNew"
+                  element={
+                    <LanNew inputs={languageInputs} title="Add new Language" />
+                  }
+                />
+              </Route>
+              <Route path="genres">
+                <Route index element={<GenList />} />
+                <Route
+                  path="GenNew"
+                  element={
+                    <GenNew inputs={genreInputs} title="Add new Genre" />
+                  }
+                />
+              </Route>
             </Route>
-            <Route path="books">
-              <Route index element={<BkList />} />
-              <Route path=":bookId" element={<BkSingle />} />
-              <Route
-                path="Bknew"
-                element={<BkNew inputs={bookInputs} title="Add new book" />}
-              />
-            </Route>
-            <Route path="authers">
-              <Route index element={<AuList />} />
-              <Route path=":autherId" element={<AuSingle />} />
-              <Route
-                path="Aunew"
-                element={<AuNew inputs={autherInputs} title="Add new auther" />}
-              />
-            </Route>
-            <Route path="languages">
-              <Route index element={<LanList />} />
-              <Route
-                path="LanNew"
-                element={
-                  <LanNew inputs={languageInputs} title="Add new Language" />
-                }
-              />
-            </Route>
-            <Route path="genres">
-              <Route index element={<GenList />} />
-              <Route
-                path="GenNew"
-                element={<GenNew inputs={genreInputs} title="Add new Genre" />}
-              />
-            </Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </div>
   );
 }

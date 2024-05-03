@@ -1,22 +1,22 @@
 import React from "react";
 import "./chart.scss";
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
+// import {
+//   AreaChart,
+//   Area,
+//   XAxis,
+//   CartesianGrid,
+//   Tooltip,
+//   ResponsiveContainer,
+// } from "recharts";
 
-const data = [
-  { name: "January", Total: 1050 },
-  { name: "February", Total: 800 },
-  { name: "March", Total: 900 },
-  { name: "April", Total: 600 },
-  { name: "May", Total: 1100 },
-  { name: "June", Total: 750 },
-];
+// const data = [
+//   { name: "January", Total: 1050 },
+//   { name: "February", Total: 800 },
+//   { name: "March", Total: 900 },
+//   { name: "April", Total: 600 },
+//   { name: "May", Total: 1100 },
+//   { name: "June", Total: 750 },
+// ];
 const Chart = () => {
   return (
     <div className="chart">

@@ -1,5 +1,18 @@
 import { axiosAPI } from "./axiosApi";
 
+export const getLang = async ({ setLang, setServerError, setFormStatus }) => {
+  try {
+    setFormStatus("loading");
+    const response = await axiosAPI.get("/api/v1/language");
+    if (response.status === 200 || response.status === 201) {
+      setLang(response.data);
+    } else {
+      setFormStatus("failed");
+    }
+  } catch (e) {
+    setFormStatus("failed");
+  }
+};
 export const getAllLang = async ({
   setLang,
   setServerError,
@@ -7,7 +20,7 @@ export const getAllLang = async ({
 }) => {
   try {
     setFormStatus("loading");
-    const response = await axiosAPI.get("/api/v1/language");
+    const response = await axiosAPI.get("/api/v1/language/selectLanguage");
     if (response.status === 200 || response.status === 201) {
       setLang(response.data);
     } else {

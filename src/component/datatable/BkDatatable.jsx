@@ -57,6 +57,8 @@ import React, { useEffect, useState } from "react";
 import { getAllBooks } from "../../api/booksApi";
 import ReactModal from "../ReactModal";
 import AddBookForm from "../forms/AddBookForm";
+import DeleteBook from "../confirmDelete/DeleteBook";
+import BookRow from "./BookRow";
 
 const BkDatatable = () => {
   const [isAddBookOpen, setIsAddBookOpen] = useState(false);
@@ -64,7 +66,10 @@ const BkDatatable = () => {
   const [formStatus, setFormStatus] = useState();
   const [serverError, setServerError] = useState();
   const [page, setPage] = useState(1);
-
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const getBooksOnDelete = async () => {
+    await getAllBooks({ setBooks, setFormStatus, setServerError, page });
+  };
   useEffect(() => {
     const fetchAllBooks = async () => {
       await getAllBooks({ setBooks, setFormStatus, setServerError, page });
@@ -120,40 +125,7 @@ const BkDatatable = () => {
           allBooks.books.map((books, index) => {
             const last = index === allBooks.books?.length - 1;
             return (
-              <div
-                key={books.id}
-                className={`grid grid-cols-12 border-black line-clamp-1 break-all  border-r border-b border-l group hover:bg-gray-200 duration-100 ${
-                  last && "rounded-b-md"
-                }`}
-              >
-                <div className="border-r border-black line-clamp-1 min-h-[150px] break-all  p-2 col-span-1  flex items-center group-hover:bg-gray-200 duration-150">
-                  <img src={books?.imgCover} alt={books.title} />
-                </div>
-                <div className="border-r border-black line-clamp-1 break-all  p-2 col-span-2  col flex items-center group-hover:bg-gray-200 duration-150">
-                  {books?.title}
-                </div>
-                <div className="border-r line-clamp-4 border-black   p-2 col-span-4  col flex items-center group-hover:bg-gray-200 duration-150">
-                  {books?.description.slice(1, 120)} ...
-                </div>
-                <div className="border-r border-black line-clamp-1 break-all p-2 w-full  px-2 flex items-center group-hover:bg-gray-200 duration-150 col-span-3">
-                  {books.id}
-                </div>
-                {/* <div className="border-r border-black line-clamp-1 break-all  p-2  flex items-center group-hover:bg-gray-200 duration-150">
-                  {books?.age}
-                </div>
-                <div className="border-r border-black line-clamp-1 break-all  p-2  flex items-center group-hover:bg-gray-200 duration-150">
-                  {books?.status}
-                </div> */}
-                <div className="border-r border-black line-clamp-1 break-all w-full  p-2 flex gap-2 items-center justify-center flex-col md:flex-row col-span-2  group-hover:bg-gray-200 duration-150">
-                  <button className="px-3 p-1 border rounded border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white duration-150 ">
-                    view
-                  </button>
-                  {/* <button className="px-3 p-1 border">edit</button> */}
-                  <button className="px-3 p-1 border rounded border-red-500 text-red-500 hover:bg-red-500 hover:text-white duration-150  ">
-                    Delete
-                  </button>
-                </div>
-              </div>
+              <BookRow books={books} last={last} onDelete={getBooksOnDelete} />
             );
           })
         ) : (

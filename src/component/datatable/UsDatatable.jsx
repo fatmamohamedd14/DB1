@@ -53,7 +53,7 @@
 //   );
 // };
 // export default Datatable;
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { getAllUsers } from "../../api/usersApis";
 
 const UsDatatable = () => {
@@ -61,17 +61,36 @@ const UsDatatable = () => {
   const [formStatus, setFormStatus] = useState();
   const [serverError, setServerError] = useState();
   const [page, setPage] = useState(1);
-
+  const [keyword, setKeyword] = useState("");
+  const fetchUsers = () => {
+    getAllUsers({ setUsers, setFormStatus, setServerError, page, keyword });
+  };
   useEffect(() => {
-    const fetchAllUsers = async () => {
-      await getAllUsers({ setUsers, setFormStatus, setServerError, page });
-    };
-    fetchAllUsers();
+    fetchUsers();
   }, [page]);
-
+  console.log(keyword);
   return (
     <div className="flex flex-col py-2 px-1">
-      <h1 className="text-2xl my-3 font-bold"> All Users</h1>
+      <div className="flex gap-3 items-center">
+        <h1 className="text-2xl my-3 font-bold"> All users</h1>
+        <div className="flex gap-2 items-center">
+          <input
+            type="text"
+            value={keyword}
+            onChange={(e) => {
+              setKeyword(e.target.value);
+            }}
+            className="w-[200px] h-fit px-3 py-1 border-b-2 border-black focus:outline-none"
+            placeholder="search users"
+          />
+          <button
+            onClick={fetchUsers}
+            className="px-3 py-1 border-2 border-green-400 text-green-400 rounded"
+          >
+            search
+          </button>
+        </div>
+      </div>
       <div className="grid grid-cols-6 border-black line-clamp-1 break-all border font-bold rounded-t-md">
         <div className="border-r border-black line-clamp-1 break-all p-2">
           id

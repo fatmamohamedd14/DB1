@@ -5,14 +5,18 @@ export const getAllUsers = async ({
   setFormStatus,
   setServerError,
   page = 1,
+  keyword,
 }) => {
   try {
     setFormStatus("loading");
-    const response = await axiosAPI.get(`/api/v1/user?page=${page}`, {
-      headers: {
-        token: localStorage.getItem("token"),
-      },
-    });
+    const response = await axiosAPI.get(
+      `/api/v1/user?page=${page}&keyword=${keyword}`,
+      {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      }
+    );
     if (response.status === 200) {
       setUsers(response.data);
       setFormStatus("success");

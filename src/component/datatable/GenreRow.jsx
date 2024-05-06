@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 import ReactModal from "../ReactModal";
-import { deleteLang } from "../../api/langApi";
 
-const LangRow = ({ lang, last, onDelete }) => {
+import { deleteGenre } from "../../api/genreApis";
+
+const GenreRow = ({ genre, last, onDelete }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [deleteFormStatus, setDeleteFormStatus] = useState("idle");
   const handleDeleteLang = async () => {
-    await deleteLang({ setFormStatus: setDeleteFormStatus, id: lang._id });
+    await deleteGenre({ setFormStatus: setDeleteFormStatus, id: genre._id });
   };
   useEffect(() => {
     if (deleteFormStatus === "success") {
@@ -17,13 +18,13 @@ const LangRow = ({ lang, last, onDelete }) => {
   }, [deleteFormStatus, onDelete]);
   return (
     <div
-      key={lang._id}
+      key={genre._id}
       className={`grid grid-cols-12 border-black line-clamp-1 break-all  border-r border-b border-l group hover:bg-gray-200 duration-100 ${
         last && "rounded-b-md"
       }`}
     >
       <div className="border-r border-black line-clamp-1 break-all  p-2 col-span-10  col flex items-center group-hover:bg-gray-200 duration-150">
-        {lang?.language}
+        {genre?.name}
       </div>
 
       <div className="border-r border-black line-clamp-1 break-all w-full  p-2 flex gap-2 items-center justify-center flex-col md:flex-row col-span-2  group-hover:bg-gray-200 duration-150">
@@ -38,7 +39,7 @@ const LangRow = ({ lang, last, onDelete }) => {
         <ReactModal modalIsOpen={isOpen} setModalIsOpen={setIsOpen}>
           <div className="space-y-8 max-w-[500px]">
             {" "}
-            <h3>are you sure you want to delete {lang?.language}</h3>
+            <h3>are you sure you want to delete {genre?.name}</h3>
             <div className="flex items-center gap-3">
               <button
                 onClick={handleDeleteLang}
@@ -60,4 +61,4 @@ const LangRow = ({ lang, last, onDelete }) => {
   );
 };
 
-export default LangRow;
+export default GenreRow;

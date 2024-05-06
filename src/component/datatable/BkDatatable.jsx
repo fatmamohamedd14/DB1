@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { getAllBooks } from "../../api/booksApi";
 import ReactModal from "../ReactModal";
 import AddBookForm from "../forms/AddBookForm";
@@ -11,20 +11,22 @@ const BkDatatable = () => {
   const [serverError, setServerError] = useState();
   const [page, setPage] = useState(1);
 
+  const fetchBooks = useCallback(() => {
+    getAllBooks({ setBooks, setFormStatus, setServerError, page });
+  }, [page]);
   const getBooksOnDelete = async () => {
-    await getAllBooks({ setBooks, setFormStatus, setServerError, page });
+    fetchBooks();
   };
   useEffect(() => {
-    const fetchAllBooks = async () => {
-      await getAllBooks({ setBooks, setFormStatus, setServerError, page });
-    };
-    fetchAllBooks();
-  }, [page]);
+    fetchBooks();
+  }, [page, fetchBooks]);
 
   return (
     <div className="flex flex-col py-2 px-1">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl my-3 font-bold"> All Books</h1>
+        <div className="flex gap-3 items-center">
+          <h1 className="text-2xl my-3 font-bold"> All Books</h1>
+        </div>
         <button
           onClick={() => {
             setIsAddBookOpen(true);

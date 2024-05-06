@@ -1,63 +1,7 @@
-// import React, { useState } from "react";
-// import "./usdatatable.scss";
-// import { DataGrid } from "@mui/x-data-grid";
-// import { userRows, userColumns } from "../../Usdatatablesource";
-
-// import { Link } from "react-router-dom";
-
-// const Datatable = () => {
-//   const [data, setData] = useState(userRows);
-//   const handleDalete = (id) => {
-//     setData(data.filter((item) => item.id !== id));
-//   };
-
-//   const actionColumn = [
-//     {
-//       field: "action",
-//       headerName: "Actoin",
-//       width: 200,
-//       renderCell: (params) => {
-//         return (
-//           <div className="cellAction">
-//             <Link to="/users/test" style={{ textDecoration: "none" }}>
-//               <div className="viewButton">View</div>
-//             </Link>
-//             <div
-//               className="deleteButton"
-//               onClick={() => handleDalete(params.row.id)}
-//             >
-//               Delete
-//             </div>
-//           </div>
-//         );
-//       },
-//     },
-//   ];
-//   return (
-//     <div className="datatable">
-//       <div className="datatableTitle">
-//         Add new user
-//         <Link to="/users/Usnew" className="link">
-//           Add new{" "}
-//         </Link>
-//       </div>
-//       <DataGrid
-//         className="datagrid"
-//         rows={data}
-//         columns={userColumns.concat(actionColumn)}
-//         pageSize={9}
-//         rowPerPageOption={[9]}
-//         checkboxSelection
-//       />
-//     </div>
-//   );
-// };
-// export default Datatable;
 import React, { useEffect, useState } from "react";
 import { getAllBooks } from "../../api/booksApi";
 import ReactModal from "../ReactModal";
 import AddBookForm from "../forms/AddBookForm";
-import DeleteBook from "../confirmDelete/DeleteBook";
 import BookRow from "./BookRow";
 
 const BkDatatable = () => {
@@ -66,7 +10,7 @@ const BkDatatable = () => {
   const [formStatus, setFormStatus] = useState();
   const [serverError, setServerError] = useState();
   const [page, setPage] = useState(1);
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
   const getBooksOnDelete = async () => {
     await getAllBooks({ setBooks, setFormStatus, setServerError, page });
   };
@@ -125,7 +69,12 @@ const BkDatatable = () => {
           allBooks.books.map((books, index) => {
             const last = index === allBooks.books?.length - 1;
             return (
-              <BookRow books={books} last={last} onDelete={getBooksOnDelete} />
+              <BookRow
+                books={books}
+                last={last}
+                onDelete={getBooksOnDelete}
+                key={books?.id}
+              />
             );
           })
         ) : (

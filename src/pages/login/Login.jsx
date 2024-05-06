@@ -19,14 +19,10 @@ const Login = () => {
   const togglePassword = () => {
     setShowPass((prev) => !prev);
   };
-  console.log(formStatus);
-  console.log(serverError);
-  console.log(token);
+
   const onSubmit = async (data) => {
     await userLogin({ setFormStatus, setServerError, setToken, data });
   };
-
-  const onError = (errors, e) => console.log("Form Errors:", errors);
 
   // In your form submission
   useEffect(() => {
@@ -50,7 +46,7 @@ const Login = () => {
     <div className="container mx-auto h-screen w-screen grid place-content-center">
       <form
         noValidate
-        onSubmit={handleSubmit(onSubmit, onError)}
+        onSubmit={handleSubmit(onSubmit)}
         className="space-y-4 p-5 border bg-white drop-shadow-md  md:min-w-[400px]"
       >
         <h1 className="text-2xl font-semibold">Login</h1>

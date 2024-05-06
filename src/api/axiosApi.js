@@ -17,6 +17,6 @@ export const axiosFileUpload = axios.create({
   baseURL: "https://bookify-new.onrender.com", // Set base URL for requests
   headers: {
     token: token, // Set default headers
-    "Content-Type": "amultipart/form-data",
+    "Content-Type": "multipart/form-data",
   },
 });

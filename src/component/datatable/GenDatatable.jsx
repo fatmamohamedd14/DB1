@@ -1,8 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import ReactModal from "../ReactModal";
-import LangRow from "./LangRow";
-import { getLang } from "../../api/langApi";
-import AddLangForm from "../forms/AddLangForm";
 import { getGenre } from "../../api/genreApis";
 import GenreRow from "./GenreRow";
 import AddGenreForm from "../forms/AddGenre";

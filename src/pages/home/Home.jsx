@@ -22,9 +22,9 @@ const Home = () => {
           <Widget type="book" />
           <Widget type="auther" />
         </div>
-        <div className="charts">
+        {/* <div className="charts">
           <Chart />
-        </div>
+        </div> */}
       </div>
     </div>
   );

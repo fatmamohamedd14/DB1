@@ -64,3 +64,22 @@ export const deleteAuthor = async ({ setFormStatus, id }) => {
     setFormStatus("failed");
   }
 };
+
+export const getSingleAuthor = async ({ setApiStatus, setAuthor, id }) => {
+  try {
+    setApiStatus("loading");
+    const response = await axiosAPI.get(`/api/v1/author/${id}`, {
+      headers: {
+        token: localStorage.getItem("token"),
+      },
+    });
+    if (response.status === 200 || response.status === 201) {
+      setAuthor(response.data.author);
+      setApiStatus("success");
+    } else {
+      setApiStatus("failed");
+    }
+  } catch (e) {
+    setApiStatus("failed");
+  }
+};

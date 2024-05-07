@@ -26,7 +26,7 @@ const GenDataTable = () => {
   return (
     <div className="flex flex-col py-2 px-1">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl my-3 font-bold"> All Genres</h1>
+        <h1 className="text-2xl my-3 font-bold"> All Authors</h1>
         <button
           onClick={() => {
             setIsAddBookOpen(true);

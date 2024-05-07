@@ -36,7 +36,7 @@ const AuSingle = () => {
                   {/* <h1 className="itemTitle">{author?.name}</h1> */}
                   <div className="detailItem">
                     <span className=" font-bold text-2xl">Name: </span>
-                    <span className="itemValue">{author?.name}</span>
+                    <span className="itemValue text-xl">{author?.name}</span>
                   </div>
                   <div className=" ">
                     <span className="font-bold text-2xl">Breif: </span>
@@ -58,7 +58,7 @@ const AuSingle = () => {
                 <div className="space-y-6">
                   <h3 className="text-2xl mt-8">Author books</h3>
                   <div className="flex flex-col gap-4">
-                    {author?.mybooks &&
+                    {author?.mybooks && author.mybooks.length > 0 ? (
                       author.mybooks.map((book) => {
                         return (
                           <div
@@ -76,7 +76,12 @@ const AuSingle = () => {
                             </div>
                           </div>
                         );
-                      })}
+                      })
+                    ) : (
+                      <div className="w-full border min-h-[300px] grid place-content-center">
+                        no books available for this author
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

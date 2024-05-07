@@ -31,3 +31,23 @@ export const getAllUsers = async ({
     // console.log(e);
   }
 };
+
+export const deleteUser = async ({ setFormStatus, id }) => {
+  try {
+    setFormStatus("loading");
+    const response = await axiosAPI.delete(`/api/v1/user/${id}`, {
+      headers: {
+        token: localStorage.getItem("token"),
+      },
+    });
+    if (response.status === 200 || response.status === 201) {
+      setFormStatus("success");
+    } else {
+      setFormStatus("failed");
+    }
+    return response;
+  } catch (e) {
+    setFormStatus("failed");
+    // console.log(e);
+  }
+};

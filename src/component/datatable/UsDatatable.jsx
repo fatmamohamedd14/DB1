@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllUsers } from "../../api/usersApis";
+import UserRow from "./UserRow";
 
 const UsDatatable = () => {
   const [allUsers, setUsers] = useState();
@@ -74,37 +75,12 @@ const UsDatatable = () => {
           allUsers.users.map((user, index) => {
             const last = index === allUsers.users.length - 1;
             return (
-              <div
-                key={user._id}
-                className={`grid grid-cols-6 border-black line-clamp-1 break-all  border-r border-b border-l group ${
-                  last && "rounded-b-md"
-                }`}
-              >
-                <div className="border-r border-black line-clamp-1 break-all p-2  px-2 flex items-center group-hover:bg-gray-200 duration-150">
-                  {user._id}
-                </div>
-                <div className="border-r border-black line-clamp-1 break-all  p-2  flex items-center group-hover:bg-gray-200 duration-150">
-                  {user?.name}
-                </div>
-                <div className="border-r border-black line-clamp-1 break-all  p-2  flex items-center group-hover:bg-gray-200 duration-150">
-                  {user?.email}
-                </div>
-                <div className="border-r border-black line-clamp-1 break-all  p-2  flex items-center group-hover:bg-gray-200 duration-150">
-                  {user?.age}
-                </div>
-                <div className="border-r border-black line-clamp-1 break-all  p-2  flex items-center group-hover:bg-gray-200 duration-150">
-                  {user?.status}
-                </div>
-                <div className="border-r border-black line-clamp-1 break-all  p-2 flex gap-2 items-center justify-center flex-col md:flex-row  group-hover:bg-gray-200 duration-150">
-                  <button className="px-3 p-1 border rounded border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white duration-150 ">
-                    view
-                  </button>
-                  {/* <button className="px-3 p-1 border">edit</button> */}
-                  <button className="px-3 p-1 border rounded border-red-500 text-red-500 hover:bg-red-500 hover:text-white duration-150  ">
-                    Delete
-                  </button>
-                </div>
-              </div>
+              <UserRow
+                last={last}
+                user={user}
+                key={user?._id}
+                onDelete={fetchUsers}
+              />
             );
           })
         ) : (

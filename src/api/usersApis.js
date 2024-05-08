@@ -51,3 +51,19 @@ export const deleteUser = async ({ setFormStatus, id }) => {
     // console.log(e);
   }
 };
+
+export const addUser = async ({ setFormStatus, data }) => {
+  try {
+    const response = await axiosAPI.post(`/api/v1/user/`, data, {
+      headers: {
+        token: localStorage.getItem("token"),
+      },
+    });
+    if (response.status === 200 || response.status === 201) {
+      setFormStatus("success");
+    }
+    return response.data;
+  } catch (error) {
+    setFormStatus("failed");
+  }
+};

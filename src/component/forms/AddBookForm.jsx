@@ -36,14 +36,11 @@ const AddBookForm = () => {
   } = useForm();
   const onSubmit = async (data) => {
     const formData = new FormData();
-    formData.append("title", data.title);
-    formData.append("bookContent", data.bookContent);
-    formData.append("imgCover", data.imgCover[0]);
-    formData.append("language", data.language);
-    formData.append("genre", data.genre);
-    formData.append("author", data.author);
-    formData.append("description", data.description);
-    await addBook({ formData, setFormStatus, setServerError });
+    await addBook({
+      formData: { ...data, imgCover: data.imgCover[0] },
+      setFormStatus,
+      setServerError,
+    });
   };
   if (formStatus === "success") {
     return (

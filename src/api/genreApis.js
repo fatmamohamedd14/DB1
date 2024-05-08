@@ -47,9 +47,14 @@ export const addGenre = async ({ setFormStatus, data }) => {
   }
 };
 export const deleteGenre = async ({ setFormStatus, id }) => {
+  const token = localStorage.getItem("token");
   try {
     setFormStatus("loading");
-    const response = await axiosAPI.delete(`/api/v1/genre/${id}`);
+    const response = await axiosAPI.delete(`/api/v1/genre/${id}`, {
+      headers: {
+        token,
+      },
+    });
     if (response.status === 200 || response.status === 201) {
       setFormStatus("success");
     } else {

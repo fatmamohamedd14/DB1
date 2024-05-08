@@ -30,29 +30,29 @@ const AddGenreForm = ({ onSuccess }) => {
   if (formStatus === "success") {
     return (
       <div className="min-h-[250px] text-2xl grid place-content-center">
-        language Added Successfully
+        genre Added Successfully
       </div>
     );
   } else
     return (
       <div>
-        <h3 className="text-xl font-bold">Add language</h3>
+        <h3 className="text-xl font-bold">Add genre</h3>
         <form
           noValidate
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-4 max-h-[90dvh] overflow-auto"
         >
           <div className="flex flex-col gap-2">
-            <label htmlFor="language">language</label>
+            <label htmlFor="language">genre</label>
             <input
               type="text"
               {...register("name", {
                 required: {
                   value: true,
-                  message: "language is required",
+                  message: "genre is required",
                 },
               })}
-              placeholder="language name"
+              placeholder="genre name"
               className="w-full border-2 focus:outline-none focus:border-slate-900 rounded p-2"
             />
             {errors.language && (

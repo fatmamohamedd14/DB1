@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import ReactModal from "../ReactModal";
 import { deleteBook } from "../../api/booksApi";
+import { Link } from "react-router-dom";
 
 const BookRow = ({ books, last, onDelete }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,9 +37,12 @@ const BookRow = ({ books, last, onDelete }) => {
       </div>
 
       <div className="border-r border-black line-clamp-1 break-all w-full  p-2 flex gap-2 items-center justify-center flex-col md:flex-row col-span-2  group-hover:bg-gray-200 duration-150">
-        <button className="px-3 p-1 border rounded border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white duration-150 ">
+        <Link
+          to={`/books/${books._id}`}
+          className="px-3 p-1 border rounded border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white duration-150 "
+        >
           view
-        </button>
+        </Link>
         <button
           onClick={() => {
             setIsOpen((prev) => !prev);

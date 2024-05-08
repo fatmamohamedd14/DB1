@@ -75,19 +75,20 @@ export const deleteBook = async ({ setFormStatus, setServerError, id }) => {
   }
 };
 
-export const getSingleBook = async ({ setFormStatus, id }) => {
+export const getSingleBook = async ({ setApiStatus, id, setBookData }) => {
   try {
-    setFormStatus("loading");
+    setApiStatus("loading");
     const response = await axiosAPI.get(`/api/v1/book/${id}`, {
       headers: {
         token: localStorage.getItem("token"),
       },
     });
     if (response.status === 200 || response.status === 201) {
-      setFormStatus("success");
+      setApiStatus("success");
+      setBookData(response.data.book);
     }
-  } catch (e) {
-    setFormStatus("failed");
-    console.log(e);
+    return response.data;
+  } catch (error) {
+    setApiStatus("failed");
   }
 };

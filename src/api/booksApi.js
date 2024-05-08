@@ -1,3 +1,4 @@
+import axios from "axios";
 import { axiosAPI, axiosFileUpload } from "./axiosApi";
 
 export const getAllBooks = async ({
@@ -36,11 +37,16 @@ export const addBook = async ({ formData, setFormStatus, setServerError }) => {
   try {
     setFormStatus("loading");
     setServerError(null);
-    const response = await axiosFileUpload.post("/api/v1/book", formData, {
-      headers: {
-        token: localStorage.getItem("token"),
-      },
-    });
+    const response = await axios.post(
+      "https://bookify-new.onrender.com/api/v1/book",
+      formData,
+      {
+        headers: {
+          token: localStorage.getItem("token"),
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     if (response.status === 200 || response.status === 201) {
       setFormStatus("success");
     }

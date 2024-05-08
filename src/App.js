@@ -52,7 +52,7 @@ function App() {
                   element={<BkNew inputs={bookInputs} title="Add new book" />}
                 />
               </Route>
-              <Route path="authers">
+              <Route path="authors">
                 <Route index element={<AuList />} />
                 <Route path=":autherId" element={<AuSingle />} />
                 <Route

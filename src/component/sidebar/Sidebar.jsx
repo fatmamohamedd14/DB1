@@ -41,10 +41,10 @@ const Sidebar = () => {
               <span>Books</span>
             </li>
           </Link>
-          <Link to="/authers" style={{ textDecoration: "none" }}>
+          <Link to="/authors" style={{ textDecoration: "none" }}>
             <li>
               <AttributionIcon className="icon" />
-              <span>Authers</span>
+              <span>Authors</span>
             </li>
           </Link>
           <Link to="/languages" style={{ textDecoration: "none" }}>

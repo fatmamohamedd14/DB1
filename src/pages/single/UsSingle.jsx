@@ -38,7 +38,7 @@ const UsSingle = () => {
                 </div>
                 <UserInfo getUser={getUser} user={user} />
 
-                <UserWishList user={user} />
+                <UserWishList getUser={getUser} user={user} />
               </div>
             )}
       </div>

@@ -1,3 +1,4 @@
+import { SetMealOutlined } from "@mui/icons-material";
 import { axiosAPI } from "./axiosApi";
 
 export const getAllUsers = async ({
@@ -90,5 +91,21 @@ export const editUserData = async ({ formData, setFormStatus, id }) => {
     return response.data;
   } catch (error) {
     setFormStatus("failed");
+  }
+};
+
+export const deleteFromWishList = async ({ setApiStatus, bookId, userId }) => {
+  try {
+    setApiStatus("loading");
+    const response = await axiosAPI.delete(`/api/v1/wishlist/${bookId}`, {
+      headers: {
+        userId: userId,
+      },
+    });
+    if (response.status === 200 || response.status === 201) {
+      setApiStatus("success");
+    }
+  } catch (error) {
+    setApiStatus("failed");
   }
 };

@@ -1,4 +1,17 @@
-const UserWishList = ({ user }) => {
+import { useEffect, useState } from "react";
+import { deleteFromWishList } from "../../../api/usersApis";
+
+const UserWishList = ({ user, getUser }) => {
+  console.log(user);
+  const [apiStatus, setApiStatus] = useState("idle");
+  useEffect(() => {
+    if (apiStatus === "success") {
+      getUser();
+    }
+  }, [apiStatus]);
+  const handleDelete = (bookId) => {
+    deleteFromWishList({ setApiStatus, userId: user._id, bookId });
+  };
   return (
     <div className="border p-3 space-y-4">
       <h2 className="text-xl font-semibold">{user?.name}'s Wishlist</h2>
@@ -14,7 +27,12 @@ const UserWishList = ({ user }) => {
                 <h3 className="text-2xl font-bold">{item.title}</h3>
                 <p className="bookDiscrepyion">{item.description}</p>
               </div>
-              <button className="absolute bottom-2 right-3 text-red-500">
+              <button
+                onClick={() => {
+                  handleDelete(item._id);
+                }}
+                className="absolute bottom-2 right-3 text-red-500"
+              >
                 {" "}
                 delete
               </button>

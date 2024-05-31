@@ -83,3 +83,27 @@ export const getSingleAuthor = async ({ setApiStatus, setAuthor, id }) => {
     setApiStatus("failed");
   }
 };
+
+export const editAuthor = async ({
+  setFormStatus,
+  setServerError,
+  data,
+  id,
+}) => {
+  try {
+    setFormStatus("loading");
+    const response = await axiosAPI.put(`/api/v1/author/${id}`, data, {
+      headers: {
+        token: localStorage.getItem("token"),
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    if (response.status === 200 || response.status === 201) {
+      setFormStatus("success");
+    }
+    return response;
+  } catch (e) {
+    setFormStatus("failed");
+    setServerError(e.response);
+  }
+};

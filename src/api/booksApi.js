@@ -53,7 +53,6 @@ export const addBook = async ({ formData, setFormStatus, setServerError }) => {
   } catch (e) {
     setFormStatus("failed");
     setServerError(e.response.data);
-    console.log(e);
   }
 };
 

@@ -3,15 +3,20 @@ import "./UsSingle.scss";
 import Sidebar from "../../component/sidebar/Sidebar";
 import Navbar from "../../component/navbar/Navbar";
 import { getSingleAuthor } from "../../api/authorsApis";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import EditAuthor from "../../component/forms/EditAuthor";
 
 const AuSingle = () => {
   const [author, setAuthor] = useState(null);
   const [apiStatus, setApiStatus] = useState("idle");
   const { autherId } = useParams();
+  const getAuthor = () => {
+    getSingleAuthor({ setApiStatus, id: autherId, setAuthor });
+  };
+
   useEffect(() => {
     if (autherId) {
-      getSingleAuthor({ setApiStatus, id: autherId, setAuthor });
+      getAuthor();
     }
   }, [autherId]);
 
@@ -28,7 +33,14 @@ const AuSingle = () => {
             <div className="left">
               {/* <div className="editButton">Edit</div> */}
               {/* <h1 className="title">Information</h1> */}
-              <img src={author?.image} alt="" className=" w-48  object-cover" />
+              <div className="flex items-start justify-between w-full">
+                <img
+                  src={author?.image}
+                  alt=""
+                  className=" w-48  object-cover"
+                />
+                <EditAuthor data={author} getAuthor={getAuthor} />
+              </div>
               <div className="item mt-5">
                 <div className="details space-y-3">
                   {/* <h1 className="itemTitle">{author?.name}</h1> */}
@@ -65,9 +77,12 @@ const AuSingle = () => {
                           >
                             <img className="w-32" src={book.imgCover} alt="" />
                             <div className=" py-2">
-                              <h3 className="text-2xl font-bold">
+                              <Link
+                                to={`/books/${book._id}`}
+                                className="text-2xl underline font-bold"
+                              >
                                 {book.title}
-                              </h3>
+                              </Link>
                               <p className="bookDiscrepyion">
                                 {book.description}
                               </p>

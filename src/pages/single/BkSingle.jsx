@@ -18,8 +18,7 @@ const BkSingle = () => {
       fetchSingleBook();
     }
   }, [id, fetchSingleBook]);
-  console.log(bookData);
-  console.log(apiStatus);
+
   return (
     <div className="single">
       <Sidebar />

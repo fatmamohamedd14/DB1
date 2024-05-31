@@ -19,15 +19,10 @@ export const getLang = async ({
     setFormStatus("failed");
   }
 };
-export const getAllLang = async ({
-  setLang,
-  setServerError,
-  setFormStatus,
-}) => {
+export const getAllLang = async ({ setLang, setFormStatus }) => {
   try {
     setFormStatus("loading");
     const response = await axiosAPI.get("/api/v1/language/selectLanguage");
-    console.log(response.status);
     if (response.status === 200) {
       setLang(response.data);
       setFormStatus("success");

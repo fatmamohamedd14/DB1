@@ -1,4 +1,4 @@
-import { axiosAPI, axiosFileUpload } from "./axiosApi";
+import { axiosAPI } from "./axiosApi";
 
 export const getAllUsers = async ({
   setUsers,
@@ -28,7 +28,6 @@ export const getAllUsers = async ({
   } catch (e) {
     setFormStatus("failed");
     setServerError(e.response);
-    // console.log(e);
   }
 };
 
@@ -48,7 +47,6 @@ export const deleteUser = async ({ setFormStatus, id }) => {
     return response;
   } catch (e) {
     setFormStatus("failed");
-    // console.log(e);
   }
 };
 
@@ -68,16 +66,10 @@ export const addUser = async ({ setFormStatus, data }) => {
   }
 };
 
-export const getSingleUser = async ({
-  setApiStatus,
-  setUser,
-  setServerError,
-  id,
-}) => {
+export const getSingleUser = async ({ setApiStatus, setUser, id }) => {
   try {
     setApiStatus("loading");
     const response = await axiosAPI.get(`/api/v1/user/${id}`);
-    console.log(response);
     if (response.status === 200) {
       setApiStatus("success");
       setUser(response.data.user);

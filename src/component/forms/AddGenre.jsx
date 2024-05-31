@@ -20,8 +20,6 @@ const AddGenreForm = ({ onSuccess }) => {
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("img", data.img[0]);
-    // console.log(data.img[0]);
-    console.log(data);
     await addGenre({
       setFormStatus,
       data: { name: data.name, img: data.img[0] },

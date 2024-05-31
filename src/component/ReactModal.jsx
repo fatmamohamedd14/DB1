@@ -50,7 +50,7 @@ const ReactModal = ({
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <div className="relative min-w-[500px]">
+      <div className="relative min-w-[500px] pb-2">
         {closeBtn && (
           <button
             onClick={closeModal}

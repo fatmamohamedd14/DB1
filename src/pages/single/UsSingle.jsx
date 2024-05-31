@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./UsSingle.scss";
 import Sidebar from "../../component/sidebar/Sidebar";
 import Navbar from "../../component/navbar/Navbar";
@@ -12,15 +12,14 @@ const UsSingle = () => {
   const { userId: id } = useParams();
   const [user, setUser] = useState();
   const [apiStatus, setApiStatus] = useState("idle");
-  const getUser = () => {
+  const getUser = useCallback(() => {
     getSingleUser({ id, setUser, setApiStatus });
-  };
+  }, [id]);
   useEffect(() => {
     if (!user) {
       getUser();
     }
-  }, [id, user]);
-  console.log(user);
+  }, [id, user, getUser]);
 
   return (
     <div className="single">

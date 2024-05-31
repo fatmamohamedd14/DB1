@@ -16,7 +16,6 @@ const AddAuthorForm = ({ onSuccess }) => {
     }
   }, [formStatus, onSuccess]);
   const onSubmit = async (data) => {
-    console.log(data);
     await addAuthor({
       setFormStatus,
       data: { name: data.name, image: data.image[0], brief: data.brief },

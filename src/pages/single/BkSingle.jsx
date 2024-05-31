@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./UsSingle.scss";
 import Sidebar from "../../component/sidebar/Sidebar";
 import Navbar from "../../component/navbar/Navbar";
 import { useParams } from "react-router-dom";
 import { getSingleBook } from "../../api/booksApi";
+import EditBook from "../../component/forms/EditBook";
 
 const BkSingle = () => {
   const [bookData, setBookData] = useState(null);
   const [apiStatus, setApiStatus] = useState("idle");
   const { bookId: id } = useParams();
-  const fetchSingleBook = async () => {
+  const fetchSingleBook = useCallback(async () => {
     await getSingleBook({ setApiStatus, setBookData, id });
-  };
+  }, [id]);
   useEffect(() => {
     if (id) {
       fetchSingleBook();
     }
-  }, [id]);
+  }, [id, fetchSingleBook]);
   console.log(bookData);
   console.log(apiStatus);
   return (
@@ -28,7 +29,10 @@ const BkSingle = () => {
           {apiStatus === "loading" ? (
             <div className="p-5 w-full">loading ...</div>
           ) : apiStatus === "success" ? (
-            <BookShowCase bookData={bookData} />
+            <BookShowCase
+              fetchSingleBook={fetchSingleBook}
+              bookData={bookData}
+            />
           ) : (
             apiStatus == "failed" && (
               <div className="grid place-content-center min-h-[400px] ">
@@ -43,15 +47,18 @@ const BkSingle = () => {
 };
 export default BkSingle;
 
-const BookShowCase = ({ bookData }) => {
+const BookShowCase = ({ bookData, fetchSingleBook }) => {
   return (
     <div className="space-y-4">
       <div className="flex flex-col gap-10 p-2 rounded border  justify-stretch">
-        <img
-          src={bookData?.imgCover}
-          className="border border-black w-[250px]"
-          alt=""
-        />
+        <div className="flex items-start justify-between">
+          <img
+            src={bookData?.imgCover}
+            className="border border-black w-[250px]"
+            alt=""
+          />
+          <EditBook getBook={fetchSingleBook} data={bookData} />
+        </div>
         <div className="flex flex-col h-full justify-between items-stretch">
           <div className="flex flex-col gap-4">
             <h1 className="text-4xl font-bold">{bookData?.title}</h1>

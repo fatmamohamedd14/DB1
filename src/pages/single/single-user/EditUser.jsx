@@ -33,7 +33,7 @@ const EditUserModal = ({ user, getUser }) => {
       setModalIsOpen(false);
       getUser();
     }
-  }, [formStatus]);
+  }, [formStatus, getUser]);
   return (
     <>
       <button

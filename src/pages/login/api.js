@@ -21,6 +21,5 @@ export const userLogin = async ({
   } catch (error) {
     setFormStatus("failed");
     setServerError({ code: error.response.status });
-    console.log(error);
   }
 };

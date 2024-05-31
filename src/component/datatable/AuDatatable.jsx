@@ -1,11 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import ReactModal from "../ReactModal";
-import LangRow from "./LangRow";
-import { getLang } from "../../api/langApi";
-import AddLangForm from "../forms/AddLangForm";
-import { getGenre } from "../../api/genreApis";
-import GenreRow from "./GenreRow";
-import AddGenreForm from "../forms/AddGenre";
 import AuthorRow from "./AuthorRow";
 import { getAuthors } from "../../api/authorsApis";
 import AddAuthorForm from "../forms/AddAuthorForm";
@@ -20,8 +14,8 @@ const GenDataTable = () => {
     getAuthors({ setAuthors, setFormStatus, setServerError, page });
   }, [page]);
   useEffect(() => {
-    fetchGenre();
-  }, [page, fetchGenre]);
+    getAuthors({ setAuthors, setFormStatus, setServerError, page });
+  }, [page]);
 
   return (
     <div className="flex flex-col py-2 px-1">

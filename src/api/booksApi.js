@@ -1,5 +1,5 @@
 import axios from "axios";
-import { axiosAPI, axiosFileUpload } from "./axiosApi";
+import { axiosAPI } from "./axiosApi";
 
 export const getAllBooks = async ({
   setBooks,
@@ -29,7 +29,6 @@ export const getAllBooks = async ({
   } catch (e) {
     setFormStatus("failed");
     setServerError(e.response);
-    // console.log(e);
   }
 };
 
@@ -71,7 +70,6 @@ export const deleteBook = async ({ setFormStatus, setServerError, id }) => {
     }
   } catch (e) {
     setFormStatus("failed");
-    console.log(e);
   }
 };
 
@@ -90,5 +88,24 @@ export const getSingleBook = async ({ setApiStatus, id, setBookData }) => {
     return response.data;
   } catch (error) {
     setApiStatus("failed");
+  }
+};
+
+export const editBook = async ({ setFormStatus, setServerError, data, id }) => {
+  try {
+    setFormStatus("loading");
+    const response = await axiosAPI.put(`/api/v1/book/${id}`, data, {
+      headers: {
+        token: localStorage.getItem("token"),
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    if (response.status === 200 || response.status === 201) {
+      setFormStatus("success");
+    }
+    return response;
+  } catch (e) {
+    setFormStatus("failed");
+    setServerError(e.response);
   }
 };

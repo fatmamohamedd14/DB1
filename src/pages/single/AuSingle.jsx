@@ -9,13 +9,11 @@ const AuSingle = () => {
   const [author, setAuthor] = useState(null);
   const [apiStatus, setApiStatus] = useState("idle");
   const { autherId } = useParams();
-  console.log(autherId);
   useEffect(() => {
     if (autherId) {
       getSingleAuthor({ setApiStatus, id: autherId, setAuthor });
     }
   }, [autherId]);
-  console.log(author);
 
   return (
     <div className="single">

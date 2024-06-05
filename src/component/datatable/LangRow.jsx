@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import ReactModal from "../ReactModal";
 import { deleteLang } from "../../api/langApi";
+import { Link } from "react-router-dom";
 
 const LangRow = ({ lang, last, onDelete }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +28,12 @@ const LangRow = ({ lang, last, onDelete }) => {
       </div>
 
       <div className="border-r border-black line-clamp-1 break-all w-full  p-2 flex gap-2 items-center justify-center flex-col md:flex-row col-span-2  group-hover:bg-gray-200 duration-150">
+        <Link
+          to={`/languages/${lang._id}`}
+          className="px-3 p-1 border rounded border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white duration-150 "
+        >
+          view
+        </Link>
         <button
           onClick={() => {
             setIsOpen((prev) => !prev);

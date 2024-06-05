@@ -25,6 +25,9 @@ import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import GenreBooksTable from "./component/datatable/GenreBooksTable";
+import GenreBooksList from "./pages/list/GenreBooksList";
+import LangBooksList from "./pages/list/LangBooksList";
 // import "./style/global.css";
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -70,6 +73,7 @@ function App() {
                     <LanNew inputs={languageInputs} title="Add new Language" />
                   }
                 />
+                <Route path=":id" element={<LangBooksList />} />
               </Route>
               <Route path="genres">
                 <Route index element={<GenList />} />
@@ -79,6 +83,7 @@ function App() {
                     <GenNew inputs={genreInputs} title="Add new Genre" />
                   }
                 />
+                <Route path=":id" element={<GenreBooksList />} />
               </Route>
             </Route>
           </Routes>

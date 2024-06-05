@@ -108,3 +108,50 @@ export const editBook = async ({ setFormStatus, setServerError, data, id }) => {
     setServerError(e.response);
   }
 };
+
+export const getBooksForGenre = async ({
+  setApiStatus,
+  setBooks,
+  id,
+  page = 1,
+}) => {
+  try {
+    setApiStatus("loading");
+    const response = await axiosAPI.get(
+      `/api/v1/genre/${id}/book?page=${page}`,
+      {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      }
+    );
+    setApiStatus("success");
+    setBooks(response.data);
+    return response.data;
+  } catch {
+    setApiStatus("failed");
+  }
+};
+export const getBooksForLanguage = async ({
+  setApiStatus,
+  setBooks,
+  id,
+  page = 1,
+}) => {
+  try {
+    setApiStatus("loading");
+    const response = await axiosAPI.get(
+      `api/v1/language/${id}/book?page=${page}`,
+      {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      }
+    );
+    setApiStatus("success");
+    setBooks(response.data);
+    return response.data;
+  } catch {
+    setApiStatus("failed");
+  }
+};

@@ -10,7 +10,7 @@ export const userLogin = async ({
     setFormStatus("loading");
     setServerError(null);
     const response = await axiosAPI.post("/api/v1/auth/signIn", data);
-    if (response.data.message && response.data.message.includes("Success")) {
+    if (response.status === 200) {
       setFormStatus("success");
       setServerError(null);
       setToken(response.data.token);

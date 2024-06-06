@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { addGenre, updateGenre } from "../../api/genreApis";
 
 const EditGenreForm = ({ onSuccess, data }) => {
-  console.log(data);
   const [formStatus, setFormStatus] = useState("idle");
   const id = data?._id;
   const {

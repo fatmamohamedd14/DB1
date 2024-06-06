@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { deleteFromWishList } from "../../../api/usersApis";
 
 const UserWishList = ({ user, getUser }) => {
-  console.log(user);
   const [apiStatus, setApiStatus] = useState("idle");
   useEffect(() => {
     if (apiStatus === "success") {

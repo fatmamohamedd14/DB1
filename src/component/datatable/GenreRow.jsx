@@ -30,26 +30,26 @@ const GenreRow = ({ genre, last, onDelete }) => {
         {genre?.name}
       </div>
 
-      <div className="border-r border-black line-clamp-1 break-all w-full  p-2 flex gap-2 items-center justify-center flex-col md:flex-row col-span-2  group-hover:bg-gray-200 duration-150">
-        <button
-          onClick={() => {
-            setEditOpen((prev) => !prev);
-          }}
-          className="px-3 p-1 border rounded border-black text-black hover:bg-black hover:text-white duration-150  "
-        >
-          Edit
-        </button>
+      <div className="border-r border-black line-clamp-1 break-all w-full  p-2 flex gap-2 items-center justify-center flex-wrap flex-col md:flex-row col-span-2  group-hover:bg-gray-200 duration-150">
         <Link
           to={`/genres/${genre._id}`}
-          className="px-3 p-1 border rounded border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white duration-150 "
+          className="px-3 whitespace-nowrap p-1 border rounded border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white duration-150 "
         >
           view
         </Link>
         <button
           onClick={() => {
+            setEditOpen((prev) => !prev);
+          }}
+          className="px-3 whitespace-nowrap p-1 border rounded border-black text-black hover:bg-black hover:text-white duration-150  "
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => {
             setIsOpen((prev) => !prev);
           }}
-          className="px-3 p-1 border rounded border-red-500 text-red-500 hover:bg-red-500 hover:text-white duration-150  "
+          className="px-3 whitespace-nowrap p-1 border rounded border-red-500 text-red-500 hover:bg-red-500 hover:text-white duration-150  "
         >
           Delete
         </button>

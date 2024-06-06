@@ -64,3 +64,21 @@ export const deleteGenre = async ({ setFormStatus, id }) => {
     setFormStatus("failed");
   }
 };
+
+export const updateGenre = async ({ setFormStatus, data, id }) => {
+  try {
+    setFormStatus("loading");
+    const response = await axiosFileUpload.put(`/api/v1/genre/${id}`, data, {
+      headers: {
+        token: localStorage.getItem("token"),
+      },
+    });
+    if (response.status === 200 || response.status === 201) {
+      setFormStatus("success");
+    } else {
+      setFormStatus("failed");
+    }
+  } catch (e) {
+    setFormStatus("failed");
+  }
+};

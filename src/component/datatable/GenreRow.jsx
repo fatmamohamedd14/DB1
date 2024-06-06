@@ -4,9 +4,11 @@ import ReactModal from "../ReactModal";
 
 import { deleteGenre } from "../../api/genreApis";
 import { Link } from "react-router-dom";
+import EditGenreForm from "../forms/EditGenreForm";
 
 const GenreRow = ({ genre, last, onDelete }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
   const [deleteFormStatus, setDeleteFormStatus] = useState("idle");
   const handleDeleteLang = async () => {
     await deleteGenre({ setFormStatus: setDeleteFormStatus, id: genre._id });
@@ -29,6 +31,14 @@ const GenreRow = ({ genre, last, onDelete }) => {
       </div>
 
       <div className="border-r border-black line-clamp-1 break-all w-full  p-2 flex gap-2 items-center justify-center flex-col md:flex-row col-span-2  group-hover:bg-gray-200 duration-150">
+        <button
+          onClick={() => {
+            setEditOpen((prev) => !prev);
+          }}
+          className="px-3 p-1 border rounded border-black text-black hover:bg-black hover:text-white duration-150  "
+        >
+          Edit
+        </button>
         <Link
           to={`/genres/${genre._id}`}
           className="px-3 p-1 border rounded border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white duration-150 "
@@ -62,6 +72,9 @@ const GenreRow = ({ genre, last, onDelete }) => {
               </button>
             </div>
           </div>
+        </ReactModal>
+        <ReactModal modalIsOpen={editOpen} setModalIsOpen={setEditOpen}>
+          <EditGenreForm onSuccess={onDelete} data={genre} />
         </ReactModal>
       </div>
     </div>
